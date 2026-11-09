@@ -15,3 +15,28 @@ document.querySelectorAll('[data-preview]').forEach((preview) => {
   });
   if (buttons.length) select(buttons[0]);
 });
+
+// A small, nonmodal navigation tray inspired by the app's puck control.
+document.querySelectorAll('[data-puck-navigation]').forEach((navigation) => {
+  const button = navigation.querySelector('button');
+  const links = navigation.querySelector('nav');
+  function setOpen(open) {
+    links.hidden = !open;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? button.dataset.closeLabel : button.dataset.openLabel);
+  }
+  navigation.hidden = false;
+  button.addEventListener('click', () => setOpen(links.hidden));
+  links.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('click', (event) => {
+    if (!navigation.contains(event.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !links.hidden) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+});

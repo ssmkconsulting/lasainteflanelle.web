@@ -1154,3 +1154,145 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
     transition:none!important;
   }
 }
+
+/* Current app: away-first scoreboards, Live Activities and a foldaway puck menu. */
+.tour-controls button[aria-pressed="true"] {
+  color:#fff;
+  background:linear-gradient(125deg,#e8133a,#870e29);
+  border-color:#ff788e;
+  box-shadow:0 0 18px #ff244b20;
+}
+.activity-feature {
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:85px;
+  align-items:center;
+  border-top:1px solid var(--line);
+  margin-top:55px;
+  padding-top:50px;
+}
+.activity-feature h3 {
+  font:italic 900 clamp(30px,3.2vw,42px)/1.08 var(--display);
+  text-transform:uppercase;
+  margin:18px 0;
+}
+.activity-feature p {
+  font-size:14px;
+  color:var(--muted);
+}
+.activity-feature figure {
+  margin:0;
+}
+.activity-feature img {
+  width:100%;
+  border-radius:28px;
+  box-shadow:-14px 10px 45px #ff244b0c,14px 10px 45px #008cff17;
+}
+.activity-feature figcaption {
+  font-size:10px;
+  color:var(--muted);
+  text-align:center;
+  margin-top:16px;
+}
+.puck-navigation {
+  position:fixed;
+  right:24px;
+  bottom:max(16px,env(safe-area-inset-bottom));
+  z-index:30;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:12px;
+}
+.puck-toggle {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--white);
+  background:#030b19f5;
+  border:1px solid #48d9ff55;
+  border-radius:50px;
+  padding:6px 15px 6px 6px;
+  cursor:pointer;
+  box-shadow:-4px 3px 16px #ff244b20,4px 3px 16px #008cff30;
+}
+.puck-emblem {
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #96dfff;
+  background:radial-gradient(ellipse at 30% 15%,#30415c,#010714 80%);
+  box-shadow:inset 0 -4px 0 #004f80,0 2px 0 #61d8ff55;
+  width:62px;
+  height:57px;
+}
+.puck-emblem img {
+  width:43px;
+  height:43px;
+  object-fit:contain;
+  border-radius:50%;
+}
+.puck-label {
+  display:flex;
+  gap:9px;
+  align-items:center;
+  font-size:11px;
+  font-weight:700;
+}
+.puck-toggle[aria-expanded="true"] .puck-label span {
+  transform:rotate(180deg);
+}
+.puck-toggle:hover {
+  border-color:var(--cyan);
+}
+.puck-links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:4px;
+  padding:6px;
+  border:1px solid #93bded66;
+  border-radius:30px;
+  background:linear-gradient(#12243cfa,#030b19fa);
+  box-shadow:0 8px 30px #0009;
+}
+.puck-links a {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:68px;
+  min-height:44px;
+  padding:8px 12px;
+  font-size:11px;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:24px;
+}
+.puck-links a:hover {
+  background:#c70b30;
+}
+body:has(.puck-navigation:not([hidden])) .footer {
+  padding-bottom:115px;
+}
+@media(max-width:1100px) {
+  .activity-feature {gap:50px;}
+}
+@media(max-width:760px) {
+  .activity-feature {
+    grid-template-columns:1fr;
+    gap:22px;
+    padding-top:34px;
+    margin-top:38px;
+  }
+  .activity-feature h3 {font-size:34px;}
+  .activity-feature .eyebrow {line-height:1.7;}
+  .activity-feature img {border-radius:20px;}
+  .puck-navigation {
+    left:16px;
+    right:16px;
+    align-items:center;
+  }
+  .puck-toggle {padding:4px 13px 4px 5px;}
+  .puck-links {max-width:100%;gap:0;}
+  .puck-links a {min-width:62px;padding:8px 10px;}
+}
