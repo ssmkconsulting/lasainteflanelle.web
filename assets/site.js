@@ -8,6 +8,8 @@ document.querySelectorAll('[data-preview]').forEach((preview) => {
     panels.forEach((panel) => { panel.hidden = panel.id !== button.dataset.panel; });
     image.src = button.dataset.image;
     image.alt = button.dataset.alt;
+    if (button.dataset.width) image.width = Number(button.dataset.width);
+    if (button.dataset.height) image.height = Number(button.dataset.height);
   }
   buttons.forEach((button) => {
     button.hidden = false;
@@ -39,4 +41,22 @@ document.querySelectorAll('[data-puck-navigation]').forEach((navigation) => {
       button.focus();
     }
   });
+});
+
+// Show real native widget renders; the examples do not request or imply live scores.
+document.querySelectorAll('[data-team-themes]').forEach((showcase) => {
+  const buttons = Array.from(showcase.querySelectorAll('[data-theme]'));
+  const image = showcase.querySelector('[data-theme-image]');
+  const name = showcase.querySelector('[data-theme-name]');
+  function select(button) {
+    buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+    image.src = button.dataset.image;
+    image.alt = button.dataset.alt;
+    name.textContent = button.dataset.name;
+  }
+  buttons.forEach((button) => {
+    button.hidden = false;
+    button.addEventListener('click', () => select(button));
+  });
+  if (buttons.length) select(buttons[0]);
 });
